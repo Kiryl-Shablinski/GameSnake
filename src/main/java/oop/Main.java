@@ -19,12 +19,15 @@ public class Main {
         System.out.println(Customer.equalsAdress(customer));
         System.out.println(customer.equalsOrder(order));
 
-         */
+
         Bird chaffinch = new Chaffinch();
         Swallow swallow = new Swallow();
         chaffinch.sitDown();
         chaffinch.takeOff();
         swallow.sitDown();
         swallow.takeOff();
+        */
+        String[] ints = {"", null};
+        System.out.println(ints.length);
     }
 }
