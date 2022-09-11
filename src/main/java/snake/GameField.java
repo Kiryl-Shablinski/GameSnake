@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class GameField extends JPanel implements ActionListener {
-    private final int SIZE = 320;
+    private final int SIZE = 304;
     private final int DOT_SIZE = 16;
     private final int ALL_DOTS = 400;
 
@@ -20,13 +20,15 @@ public class GameField extends JPanel implements ActionListener {
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
 
-  //  private int[] appleX = new int[3];
-  //  private int[] appleY = new int[3];
+    //  private int[] appleX = new int[3];
+    //  private int[] appleY = new int[3];
 
     //создадим отдельный класс яблок и поля для их хранения
     private Apple[] apples = new Apple[3];
+
     //создадим поле хранения количества яблок
     private int countApple = 0;
+    private boolean isApples = false;
 
     private int dots;
     private Timer timer;
@@ -47,11 +49,15 @@ public class GameField extends JPanel implements ActionListener {
     public void createApple() {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
-           //  appleX[i] = random.nextInt(20) * DOT_SIZE;
-           //  appleY[i] = random.nextInt(20) * DOT_SIZE;
-            apples[i] = new Apple(random.nextInt(20) * DOT_SIZE, random.nextInt(20) * DOT_SIZE);
+            int tmpX = random.nextInt(19) * DOT_SIZE;
+            int tmpY = random.nextInt(19) * DOT_SIZE;
+
+            apples[i] = new Apple(tmpX, tmpY);
             countApple++;
+
         }
+
+
     }
 
     public void initGame() {
@@ -78,6 +84,7 @@ public class GameField extends JPanel implements ActionListener {
         }
         if (countApple == 0)
             createApple();
+
     }
 
     @Override
@@ -95,6 +102,7 @@ public class GameField extends JPanel implements ActionListener {
             String str = "Game Over";
             g.setColor(Color.CYAN);
             g.drawString(str, SIZE / 3, SIZE / 2);
+
         }
     }
 
@@ -108,9 +116,15 @@ public class GameField extends JPanel implements ActionListener {
         if (x[0] < 0)
             x[0] = SIZE;
         if (y[0] > SIZE)
+            inGame = false;
+        if (y[0] < 0)
+            inGame = false;
+      /*  if (y[0] > SIZE)
            y[0] = 0;
         if (y[0] < 0)
             y[0] = SIZE;
+
+       */
     }
     @Override
     public void actionPerformed(ActionEvent a){
