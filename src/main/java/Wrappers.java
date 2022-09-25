@@ -10,9 +10,8 @@ import java.util.Scanner;
 
 public class Wrappers {
     public static void main(String[] args) {
-        //обернем ввод в блок try catch recourse
-        try(Scanner sc = new Scanner(System.in)){
-            wrappers();
+        //можно обернуть ввод в блок try catch recourse
+    /*    try(Scanner sc = new Scanner(System.in)){
             int a = Integer.parseInt(sc.nextLine());
             System.out.println(a);
             int b = Integer.parseInt(sc.nextLine());
@@ -20,8 +19,40 @@ public class Wrappers {
         }catch (NumberFormatException  e){
             System.out.println("Not Valid");
         }
+     */
+
+       Scanner sc = new Scanner(System.in);
+        String a = sc.nextLine();
+        if (parser(a))
+            System.out.println(a);
+        else {
+            System.out.println("Not valid");
+        }
+        wrappers();
     }
 
+    public static boolean parser(String s){
+       boolean isDigit = false;
+        if (s.length() == 0) return false;
+        char[] ch = s.toCharArray();
+        if (ch[0] == '-' && ch.length == 1) return false;
+        if (ch[0] == '.') return  false;
+        boolean point = false;
+        for (int i = 0; i < ch.length; i++) {
+            if(ch[i] == '-' && i == 0) {
+                continue;
+            }
+            if (ch[i] == '.' && !point) {
+                point = true;
+                continue;
+            }else if(ch[i] == '.' && point){
+                return false;
+            }
+            if (Character.isDigit(ch[i]))
+              isDigit = true;
+        }
+        return isDigit;
+    }
     public static void wrappers(){
         byte b = 45;
         short sh = 67;
