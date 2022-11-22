@@ -10,7 +10,7 @@ public class MyThread extends Thread{
        thread.start();
 
     }
-
+    @Override
     public void run() {
        Date date  = new Date();
         System.out.printf("Current date: %tT %tA %td %tB %tY", date, date, date, date, date);
